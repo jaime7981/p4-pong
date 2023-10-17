@@ -6,6 +6,7 @@ class Player():
     def __init__(self, side : Side = Side.LEFT, controls : Control = Control(), position : list[int, int] = [0, 0], name = 'default', size = 10, color = 'white') -> None:
         self.name = name
         self.color = color
+        self.score = 0
 
         self.width = size
         self.height = size * 8 

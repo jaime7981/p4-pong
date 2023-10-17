@@ -13,8 +13,11 @@ class GUI():
         self.running = True
         self.fps = 60
         self.background_color = (0, 0, 0)
+        
+        pygame.font.init()
+        self.font = pygame.font.SysFont('Arial', 10)
 
-        #self.setup_players()
+        self.setup_players()
 
 
     def setup_players(self):
@@ -22,11 +25,11 @@ class GUI():
             if counter == 0:
                 player.set_controls(ControlType.KEYBOARD)
                 player.set_side(Side.LEFT)
-                player.position[0] = 100
+                player.position[0] = self.screen.get_width() / 10 + player.width + 10
             elif counter == 1:
                 player.set_controls(ControlType.MOUSE)
                 player.set_side(Side.RIGHT)
-                player.position[0] = self.screen.get_width() - player.width
+                player.position[0] = 9 * self.screen.get_width() / 10 - player.width - 10
 
 
     def handle_events(self):
@@ -78,7 +81,22 @@ class GUI():
                 player.width / 4
             )
 
+            self.draw_players_score(player)
 
+
+    def draw_players_score(self, player : Player):
+        score_offset = 100
+        score_size = 80
+
+        score_x = player.position[0] - score_offset - score_size / 2 - player.width
+        score_y = 30
+
+        if player.side == Side.LEFT:
+            score_x = player.position[0] + score_offset
+
+        score = pygame.font.SysFont('Arial', score_size).render(str(player.score), True, player.color)
+        self.screen.blit(score, (score_x, score_y))
+        
 
     def run_game(self):
         print(self.players)
