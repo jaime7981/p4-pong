@@ -48,6 +48,9 @@ class GUI():
             player_position_x = player.position[0]
             player_position_y = player.position[1]
 
+            if player.side == Side.LEFT:
+                player_position_x = player.position[0] - player.width
+
             pygame.draw.rect(
                 self.screen, 
                 player.color, 
@@ -57,6 +60,22 @@ class GUI():
                     player.width, 
                     player.height
                 )
+            )
+
+            # For debuging purposes draws the player saved postition
+            pygame.draw.circle(
+                self.screen, 
+                'white', 
+                player.position, 
+                player.width / 4
+            )
+            
+            # For debuging purposes draws the player center
+            pygame.draw.circle(
+                self.screen, 
+                'grey',
+                player.get_player_center(), 
+                player.width / 4
             )
 
 

@@ -16,6 +16,8 @@ class Player():
 
 
     def get_player_center(self):
+        if self.side == Side.LEFT:
+            return [self.position[0] - self.width / 2, self.position[1] + self.height / 2]
         return [self.position[0] + self.width / 2, self.position[1] + self.height / 2]
 
 
