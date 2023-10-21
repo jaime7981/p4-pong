@@ -3,12 +3,14 @@ from classes.player import Player
 from classes.control import Control
 from classes.enums import ControlType
 from classes.enums import Side
+from classes.ball import Ball
 
 class GUI():
     def __init__(self, players : list[Player] = [Player(), Player()]) -> None:
         self.players : list[Player] = players
+        self.ball = Ball(800, 600)
 
-        self.screen = pygame.display.set_mode((800, 600))
+        self.screen = pygame.display.set_mode((800, 600)) # (width,height)
         self.clock = pygame.time.Clock()
         self.running = True
         self.fps = 60
@@ -65,6 +67,8 @@ class GUI():
                 )
             )
 
+            pygame.draw.circle(self.screen,'white', (self.ball.x_coordinate, self.ball.y_coordinate), self.ball.radius)
+            
             # For debuging purposes draws the player saved postition
             pygame.draw.circle(
                 self.screen, 
@@ -107,6 +111,7 @@ class GUI():
 
             self.screen.fill(self.background_color)
             self.draw_players()
-
+            self.ball.check_wall_collision()
+            self.ball.move()
             # pygame.display.flip()
             pygame.display.update()
