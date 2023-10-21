@@ -111,7 +111,13 @@ class GUI():
 
             self.screen.fill(self.background_color)
             self.draw_players()
-            self.ball.check_wall_collision()
+            self.ball.check_collision(
+                [
+                    self.players[0].position, # asuming the left player will always be the first on the list
+                    self.players[1].position
+                ],
+                [self.players[0].width,self.players[0].height]
+                )
             self.ball.move()
             # pygame.display.flip()
             pygame.display.update()
