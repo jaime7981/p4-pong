@@ -35,6 +35,8 @@ class GUI():
 
 
     def handle_events(self):
+        left_side_player = self.players[0]
+        right_side_player = self.players[1]
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
@@ -42,6 +44,11 @@ class GUI():
             if event.type == pygame.KEYDOWN:
                 self.handle_player_controls(event.key)
 
+            if event.type == self.ball.left_side_collision:
+                right_side_player.score += 1
+
+            if event.type == self.ball.right_side_collision:
+                left_side_player.score += 1
 
     def handle_player_controls(self, event):
         for player in self.players:

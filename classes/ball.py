@@ -8,6 +8,8 @@ class Ball():
         self.y_coordinate = height/2 - self.radius
         self.x_velocity = 1.5
         self.y_velocity = 1.5
+        self.left_side_collision = pygame.event.custom_type()
+        self.right_side_collision = pygame.event.custom_type()
 
     def check_collision(self, players_positions: list[list[int]], players_proportions: list[int]):
         has_player_collided = self.check_player_collision(players_positions, players_proportions)
@@ -40,18 +42,20 @@ class Ball():
         if self.y_coordinate <= 0 + self.radius or self.y_coordinate >= 600 - self.radius:
             self.y_velocity *= -1 #si toca el borde superor o inferior de la pantalla cambiar sentido
             has_colided = True
-        if self.x_coordinate >= 800 - self.radius:
+        if self.x_coordinate >= 800 - self.radius: #right side collision
             self.x_coordinate = 800/2 - self.radius
             self.y_coordinate = 600/2 - self.radius
             self.x_velocity *= -1
             self.y_velocity *= -1
             has_colided = True
-        if self.x_coordinate <= 0 + self.radius:
+            pygame.event.post(pygame.event.Event(self.right_side_collision))
+        if self.x_coordinate <= 0 + self.radius: #left side collision
             self.x_coordinate = 800/2 - self.radius
             self.y_coordinate = 600/2 - self.radius
             self.x_velocity = 1.5
             self.y_velocity = 1.5
             has_colided = True
+            pygame.event.post(pygame.event.Event(self.left_side_collision))
 
     def move(self):
         self.x_coordinate += self.x_velocity
