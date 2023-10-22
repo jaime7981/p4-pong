@@ -40,8 +40,17 @@ class Ball():
         if self.y_coordinate <= 0 + self.radius or self.y_coordinate >= 600 - self.radius:
             self.y_velocity *= -1 #si toca el borde superor o inferior de la pantalla cambiar sentido
             has_colided = True
-        if self.x_coordinate <= 0 + self.radius or self.x_coordinate >= 800 - self.radius:
-            self.x_velocity *= -1 #si toca el borde izquierdo o derecho de la pantalla cambiar sentido
+        if self.x_coordinate >= 800 - self.radius:
+            self.x_coordinate = 800/2 - self.radius
+            self.y_coordinate = 600/2 - self.radius
+            self.x_velocity *= -1
+            self.y_velocity *= -1
+            has_colided = True
+        if self.x_coordinate <= 0 + self.radius:
+            self.x_coordinate = 800/2 - self.radius
+            self.y_coordinate = 600/2 - self.radius
+            self.x_velocity = 1.5
+            self.y_velocity = 1.5
             has_colided = True
 
     def move(self):
