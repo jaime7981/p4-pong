@@ -10,7 +10,7 @@ def main():
         color='red', 
         side=Side.LEFT, 
         controls=Control(ControlType.KEYBOARD),
-        position=[100, 100]
+        position=[100, 300]
     )
 
     player_two = Player(
@@ -18,7 +18,7 @@ def main():
         color='blue', 
         side=Side.RIGHT, 
         controls=Control(ControlType.MOUSE),
-        position=[700, 100]
+        position=[700, 300]
     )
 
     gui = GUI(players=[player_one, player_two])
