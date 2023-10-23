@@ -63,6 +63,9 @@ class GUI():
             if event.type == pygame.KEYDOWN:
                 self.handle_player_controls(event.key)
 
+            if event.type == pygame.MOUSEWHEEL:
+                self.handle_player_controls(event.y)
+
             if event.type == self.ball.left_side_collision:
                 right_side_player.score += 1
 

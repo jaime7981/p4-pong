@@ -9,11 +9,11 @@ class Control():
 
     def set_keys(self, control_type: ControlType):
         if control_type == ControlType.KEYBOARD:
-            self.set_key_up(pygame.K_e)
-            self.set_key_down(pygame.K_d)
-        elif control_type == ControlType.MOUSE:
             self.set_key_up(pygame.K_w)
             self.set_key_down(pygame.K_s)
+        elif control_type == ControlType.MOUSE:
+            self.set_key_up(1)
+            self.set_key_down(-1)
 
 
     def set_key_up(self, key):
