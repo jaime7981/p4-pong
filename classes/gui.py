@@ -70,14 +70,19 @@ class GUI():
 
             if event.type == self.ball.left_side_collision:
                 right_side_player.score += 1
+                self.handle_end_game(right_side_player)
 
             if event.type == self.ball.right_side_collision:
                 left_side_player.score += 1
+                self.handle_end_game(left_side_player)
 
     def handle_player_controls(self, event):
         for player in self.players:
             player.handle_control_strokes(event)
 
+    def handle_end_game(self, player):
+        if player.score >= 5:
+            self.running = False
 
     def draw_players(self):
         for player in self.players:
@@ -99,22 +104,6 @@ class GUI():
             )
 
             pygame.draw.circle(self.screen,'white', (self.ball.x_coordinate, self.ball.y_coordinate), self.ball.radius)
-            
-            # For debuging purposes draws the player saved postition
-            pygame.draw.circle(
-                self.screen, 
-                'white', 
-                player.position, 
-                player.width / 4
-            )
-            
-            # For debuging purposes draws the player center
-            pygame.draw.circle(
-                self.screen, 
-                'grey',
-                player.get_player_center(), 
-                player.width / 4
-            )
 
             self.draw_players_score(player)
 
