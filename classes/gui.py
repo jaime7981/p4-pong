@@ -17,6 +17,7 @@ class GUI():
         self.fps = 60
         self.background_color = (0, 0, 0)
         
+        pygame.key.set_repeat(40)
         pygame.font.init()
         self.font = pygame.font.SysFont('Arial', 10)
 
@@ -61,6 +62,7 @@ class GUI():
                 self.running = False
 
             if event.type == pygame.KEYDOWN:
+                print("KEYDOWN")
                 self.handle_player_controls(event.key)
 
             if event.type == pygame.MOUSEWHEEL:

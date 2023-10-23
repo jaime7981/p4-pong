@@ -45,12 +45,26 @@ class Player():
 
     
     def move_player_up(self):
-        self.position[1] -= 10
+        has_touched_top_wall = self.check_top_bound_move()
+        if not has_touched_top_wall:
+            self.position[1] -= 10
 
+    def check_top_bound_move(self):
+        has_touched_top_wall = False
+        if self.position[1] <= 0:
+            has_touched_top_wall = True
+        return has_touched_top_wall
 
     def move_player_down(self):
-        self.position[1] += 10
+        has_touched_bottom_wall = self.check_bottom_bound_move()
+        if not has_touched_bottom_wall:
+            self.position[1] += 10
 
+    def check_bottom_bound_move(self):
+        has_touched_bottom_wall = False
+        if self.position[1] >= 600 - self.height:
+            has_touched_bottom_wall = True
+        return has_touched_bottom_wall
 
     def class_info_string(self):
         return f'Player: {self.name} / Side: {self.side} / Controls: {self.controls} / Position: {self.position}'
