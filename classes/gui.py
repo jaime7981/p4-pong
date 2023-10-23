@@ -3,10 +3,11 @@ from classes.player import Player
 from classes.control import Control
 from classes.enums import ControlType
 from classes.enums import Side
+from classes.enums import Difficulty
 from classes.ball import Ball
 
 class GUI():
-    def __init__(self, players : list[Player] = [Player(), Player()]) -> None:
+    def __init__(self, players : list[Player] = [Player(), Player()], difficulty: Difficulty = Difficulty.EASY) -> None:
         self.players : list[Player] = players
         self.ball = Ball(800, 600)
 
@@ -20,7 +21,25 @@ class GUI():
         self.font = pygame.font.SysFont('Arial', 10)
 
         self.setup_players()
+        self.setup_difficulty(difficulty)
 
+
+    def setup_difficulty(self, difficulty: Difficulty):
+        if difficulty == Difficulty.EASY:
+            self.ball.set_speed(1.0)
+        elif difficulty == Difficulty.MEDIUM:
+            self.ball.set_speed(2.0)
+        elif difficulty == Difficulty.HARD:
+            self.ball.set_speed(3.0)
+
+        for player in self.players:
+            if difficulty == Difficulty.EASY:
+                player.set_size(10)
+            elif difficulty == Difficulty.MEDIUM:
+                player.set_size(20)
+            elif difficulty == Difficulty.HARD:
+                player.set_size(30)
+        
 
     def setup_players(self):
         for counter, player in enumerate(self.players):

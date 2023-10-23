@@ -30,6 +30,11 @@ class Player():
         self.side = side_type
 
 
+    def set_size(self, size : int):
+        self.width = size
+        self.height = size * 8
+
+
     def handle_control_strokes(self, key_event):
         if key_event == self.controls.key_up:
             self.controls.up()

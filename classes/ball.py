@@ -11,6 +11,11 @@ class Ball():
         self.left_side_collision = pygame.event.custom_type()
         self.right_side_collision = pygame.event.custom_type()
 
+
+    def set_speed(self, speed: int):
+        self.x_velocity = speed
+        self.y_velocity = speed
+
     def check_collision(self, players_positions: list[list[int]], players_proportions: list[int]):
         has_player_collided = self.check_player_collision(players_positions, players_proportions)
         if not has_player_collided:
