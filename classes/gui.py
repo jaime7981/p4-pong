@@ -35,11 +35,11 @@ class GUI():
 
         for player in self.players:
             if difficulty == Difficulty.EASY:
-                player.set_size(10)
+                player.set_size(30)
             elif difficulty == Difficulty.MEDIUM:
                 player.set_size(20)
             elif difficulty == Difficulty.HARD:
-                player.set_size(30)
+                player.set_size(10)
         
 
     def setup_players(self):
