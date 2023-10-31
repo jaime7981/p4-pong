@@ -119,7 +119,33 @@ class GUI():
 
         score = pygame.font.SysFont('Arial', score_size).render(str(player.score), True, player.color)
         self.screen.blit(score, (score_x, score_y))
-        
+
+    
+    def draw_keys(self):
+        for player in self.players:
+            key_up = None
+            key_down = None
+
+            if player.side == Side.LEFT:
+                key_up = self.font.render('w', True, player.color)
+                key_down = self.font.render('s', True, player.color)
+            elif player.side == Side.RIGHT:
+                key_up = self.font.render('Scroll Up ↑', True, player.color)
+                key_down = self.font.render('Scroll Down ↓', True, player.color)
+            
+            # draw key up
+            key_up_x = player.position[0] - 20
+            key_up_y = player.position[1] - 20
+
+            self.screen.blit(key_up, (key_up_x, key_up_y))
+
+            # draw key down
+            key_down_x = player.position[0] - 20
+            key_down_y = player.position[1] + player.height
+
+            self.screen.blit(key_down, (key_down_x, key_down_y))
+            
+
 
     def run_game(self):
         print(self.players)
@@ -130,6 +156,7 @@ class GUI():
 
             self.screen.fill(self.background_color)
             self.draw_players()
+            self.draw_keys()
             self.ball.check_collision(
                 [
                     self.players[0].position, # asuming the left player will always be the first on the list
