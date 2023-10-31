@@ -144,7 +144,21 @@ class GUI():
             key_down_y = player.position[1] + player.height
 
             self.screen.blit(key_down, (key_down_x, key_down_y))
-            
+    
+
+    def draw_game_over(self):
+        # Draw Game over text
+        winner_player = None
+
+        for self.players in self.players:
+            if self.players.score >= 5:
+                winner_player = self.players.name
+
+        game_over_text = pygame.font.SysFont('Arial', 80).render(f'Game Over: {winner_player} wins', True, (255, 255, 255))
+        game_over_text_x = self.screen.get_width() / 2 - game_over_text.get_width() / 2
+        game_over_text_y = self.screen.get_height() / 2 - game_over_text.get_height() / 2
+        self.screen.blit(game_over_text, (game_over_text_x, game_over_text_y))
+
 
 
     def run_game(self):
@@ -167,3 +181,9 @@ class GUI():
             self.ball.move()
             # pygame.display.flip()
             pygame.display.update()
+
+        self.draw_game_over()
+        pygame.display.update()
+
+        input('Press any key to exit')
+        pygame.quit()
