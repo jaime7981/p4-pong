@@ -185,5 +185,11 @@ class GUI():
         self.draw_game_over()
         pygame.display.update()
 
-        input('Press any key to exit')
-        pygame.quit()
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    exit()
+
+        """ input('Press any key to exit')
+        pygame.quit() """
