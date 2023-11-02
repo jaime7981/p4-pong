@@ -145,16 +145,35 @@ class GUI():
 
             self.screen.blit(key_down, (key_down_x, key_down_y))
     
+    def get_player_with_highest_score(self):
+        highest_score = 0
+        player_with_highest_score = None
+
+        if self.is_player_score_draw():
+            return "Tie"
+
+        for player in self.players:
+            if player.score > highest_score:
+                highest_score = player.score
+                player_with_highest_score = player
+
+        return player_with_highest_score.name
+    
+    def is_player_score_draw(self):
+        if self.players[0].score == self.players[1].score:
+            return True
+        else:
+            return False
 
     def draw_game_over(self):
         # Draw Game over text
-        winner_player = None
+        winner_player = self.get_player_with_highest_score()
+        game_over_message = f'Game Over: {winner_player} wins'
 
-        for self.players in self.players:
-            if self.players.score >= 5:
-                winner_player = self.players.name
+        if winner_player == "Tie":
+            game_over_message = "Game Over: Tie"
 
-        game_over_text = pygame.font.SysFont('Arial', 80).render(f'Game Over: {winner_player} wins', True, (255, 255, 255))
+        game_over_text = pygame.font.SysFont('Arial', 50).render(game_over_message, True, (255, 255, 255))
         game_over_text_x = self.screen.get_width() / 2 - game_over_text.get_width() / 2
         game_over_text_y = self.screen.get_height() / 2 - game_over_text.get_height() / 2
         self.screen.blit(game_over_text, (game_over_text_x, game_over_text_y))
